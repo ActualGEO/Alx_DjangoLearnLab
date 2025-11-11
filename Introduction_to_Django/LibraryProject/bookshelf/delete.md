@@ -4,4 +4,4 @@
 
 - Book.objects.all()
 
-- # Empty after deleted
+* Empty after deleted
