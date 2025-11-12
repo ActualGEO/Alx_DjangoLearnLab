@@ -1,7 +1,7 @@
-- Book.objects.get(title="Nineteen Eighty-Four")
+- "Book.objects.get(title="Nineteen Eighty-Four")"
 
-- book1.delete()
+- "book1.delete()"
 
-- Book.objects.all()
+- "Book.objects.all()"
 
-* Empty after deleted
+* "Empty after deleted"
