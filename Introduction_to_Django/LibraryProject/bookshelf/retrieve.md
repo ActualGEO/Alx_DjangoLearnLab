@@ -1,5 +1,7 @@
-- Book.objects.all()
+from django.db import models
 
-- 0utput: <QuerySet [<Book: Book object (1)>]>
+Book.objects.all()
 
--shelf/retrieve.md doesn't contain: ["Book.objects.get", "1984"]
+0utput: <QuerySet [<Book: Book object (1)>]>
+
+shelf/retrieve.md doesn't contain: ["Book.objects.get", "1984"]

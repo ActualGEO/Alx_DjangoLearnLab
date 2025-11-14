@@ -1,10 +1,12 @@
-. Book.objects.get(title='Nineteen Eighty-Four')
+from django.db import models
 
-. book1.delete()
+Book.objects.get(title='Nineteen Eighty-Four')
 
-. Book.objects.all()
-. <Queryset []>
+book1.delete()
 
-* Empty after deleted
+Book.objects.all()
+<Queryset []>
+
+Empty after deleted
 
 ["book.delete", "fom bookshelf.models import]
