@@ -18,7 +18,7 @@ def query_books_by_author(author_name):
 
 def list_books_in_library(library_name):
     try:
-        library = Library.objects.fliter(name = library_name)
+        library = Library.objects.get(name = library_name)
         books = library.books.all()
         if books.exists():
             for book in books:
