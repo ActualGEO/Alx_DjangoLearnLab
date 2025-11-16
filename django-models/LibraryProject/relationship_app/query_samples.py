@@ -2,7 +2,8 @@ from relationship_app.models import Author, Book, Library, Librarian
 
 def query_books_by_author(author_name):
     try:
-        author = Author.objects.fliter(name=author_name)
+        author = Author.objects.get(name=author_name)
+        books = Book.objects.fliter(author=author)
         books = author.books.all()
         if books.exists():
             for book in books:
