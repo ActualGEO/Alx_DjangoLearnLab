@@ -1,9 +1,9 @@
 from django.urls import path
-from . import views
+from .views import list_books, LibraryDetailView
 
 urlspatterns = [
-    path('books/', views.list_book, name='list_book'),
-    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='libary_view'),
+    path('books/', list_books, name='list_book'),
+    path('library/<int:pk>/', LibraryDetailView.as_view(), name='libary_view'),
 
 
 ]
