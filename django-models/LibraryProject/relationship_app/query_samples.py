@@ -2,7 +2,7 @@ from relationship_app.models import Author, Book, Library, Librarian
 
 def query_books_by_author(author_name):
     try:
-        author = Author.objects.fliter(name=author_name)
+        author = Author.objects.get(name=author_name)
         books = author.books.all()
         if books.exists():
             for book in books:
@@ -16,9 +16,9 @@ def query_books_by_author(author_name):
 
 
 
-def list_books_in_library(library_name):
+def list_all_books_in_a_library(library_name):
     try:
-        library = Library.objects.get(name = library_name)
+        library = Library.objects.get(name=library_name)
         books = library.books.all()
         if books.exists():
             for book in books:
@@ -32,7 +32,7 @@ def list_books_in_library(library_name):
 
 def get_librarian_for_library(library_name):
     try:
-        library = Library.objects.fliter(name=library_name)
+        library = Library.objects.get(name=library_name)
         librarian = library.Librarian
         print(f"Librarian: {Librarian.name}")
     except Library.DoesNotExist:
