@@ -7,22 +7,17 @@ def query_all_books_by_a_specific_author(author_name):
         print(f"Books by {author_name}:")
         for book in books:
                 print(f"{book.title}")
-        return books
-        
+        return books      
     except Author.DoesNotExist:
         print(f"Author '{author_name}' not found")
         return []
-
-
-    except Author.DoesNotExist:
-        print(f"Author '{author_name}' not found")
-
 
 
 def list_all_books_in_a_library(library_name):
     try:
         library = Library.objects.get(name=library_name)
         books = library.books.all()
+        print(f"Books in {library_name} library")
         if books.exists():
             for book in books:
                 print(f"{book.title} by {book.author.name}")
@@ -30,7 +25,6 @@ def list_all_books_in_a_library(library_name):
             print("This library has no books.")
     except Library.DoesNotExist:
         print(f"Library '{library_name}' not found.")
-
 
 
 def get_librarian_for_library(library_name):
