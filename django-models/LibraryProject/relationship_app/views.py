@@ -95,3 +95,20 @@ def delete_book(request, pk):
         messages.success(request, 'Book deleted successfully')
         return redirect ('list_books')
     return render(request, 'relationship_app/delete_book.html', {'book' : book})
+
+
+@permission_required('relationship_app.can_change_book')
+def change_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Book updated successfully')
+            return redirect('list_books')
+        
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, 'relationship_app/change_book.html')
