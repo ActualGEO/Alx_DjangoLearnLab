@@ -121,7 +121,7 @@ STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : [
-        'rest-framework.authenication.TokenAuthentication',
+        'rest_framework.authenication.TokenAuthentication',
     ],
 
     'DEFAULT_PERMISSION_CLASSES' : [
