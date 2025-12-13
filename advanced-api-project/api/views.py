@@ -6,8 +6,9 @@ from rest_framework.generics import (
     UpdateAPIView,
     DestroyAPIView
 )
-from .models import Book, Author
+from .models import Book
 from .serializers import BookSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 # Create your views here.
 class ListView(ListAPIView):
