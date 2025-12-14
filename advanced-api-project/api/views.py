@@ -9,12 +9,19 @@ from rest_framework.generics import (
 from .models import Book
 from .serializers import BookSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+from rest_framework.filters import OrderingFilter
 
 # Create your views here.
 class ListView(ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['publication_year', 'author', 'title']
+    search_fields = ['title', 'author']
+    ordering_fields = ['title', 'publication_year']
 
 class DetailView(RetrieveAPIView):
     queryset = Book.objects.all()
@@ -24,7 +31,7 @@ class DetailView(RetrieveAPIView):
 class CreateView(CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
 class UpdateView(UpdateAPIView):
     queryset = Book.objects.all()

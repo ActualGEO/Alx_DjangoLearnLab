@@ -16,10 +16,10 @@ class BookSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(many=True, read_only=True)
     class Meta:
         model = Book
-        fields = ['title', 'publication_date', 'author']
+        fields = ['title', 'publication_year', 'author']
         
-    def validate_publication_date(self, value):
+    def validate_publication_year(self, value):
         current_year = datetime.now().year
         if value > current_year:
-            raise serializers.ValidationError('Publication date shouls be the present date you want to publish')
+            raise serializers.ValidationError('Publication date should be the present date you want to publish')
         return value
