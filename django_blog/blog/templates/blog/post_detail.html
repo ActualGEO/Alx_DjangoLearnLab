@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="layout">
+    <main>
+        <article>
+            <h2>{{ post.title }}</h2>
+                <div class="post-meta">By {{ post.author }} • {{ post.published_date|date:"M d, Y" }}</div>
+                {% if post.tags.all %}
+                    <div class="post-meta">Tags:
+                        {% for t in post.tags.all %}
+                            <span class="tag"><a href="{% url 'posts-by-tag' slug=t.slug %}">#{{ t.name }}</a></span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            <div class="post-body">{{ post.content|linebreaks }}</div>
+        </article>
+
+        {% if user.is_authenticated %}
+        <p>
+            <a class="btn" href="{% url 'update-post' pk=post.pk %}">Edit</a>
+            <a class="btn" href="{% url 'delete-post' pk=post.pk %}">Delete</a>
+            <a class="btn" href="{% url 'comment' pk=post.pk %}">Comments</a>
+        </p>
+        {% endif %}
+    
+        <section class="comments">
+            <h3>Comments</h3>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="post-card comment-card">
+                        <p><strong>{{ comment.author }}</strong></p>
+                        <p>{{ comment.content }}</p>
+                        <div class="post-meta">{{ comment.created_at }}</div>
+                        {% if user.is_authenticated and user == comment.author %}
+                            <p>
+                                <a class="btn" href="{% url 'comment-update' pk=comment.pk %}">Edit</a>
+                                <a class="btn" href="{% url 'comment-delete' pk=comment.pk %}">Delete</a>
+                            </p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No comments yet</p>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <p><a class="btn" href="{% url 'create-comment' pk=post.pk %}">Add Comment</a></p>
+            {% endif %}
+        </section>
+    </main>
+
+    <aside class="sidebar">
+        <div class="widget">
+            <h4 class="widget-title">About the author</h4>
+            <p class="muted">{{ post.author.username }}</p>
+        </div>
+        <div class="widget">
+            <h4 class="widget-title">Recent posts</h4>
+            <ul>
+                {% for r in recent_posts %}
+                <li><a href="{% url 'post-detail' pk=r.pk %}">{{ r.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </aside>
+</div>
+{% endblock content %}
